@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Medical Web App</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <h1>Welcome! Check medical resource availability at your finger tips :)</h1>
+    <div class="web_app">    
+        <div class="search_bar_area">
+                    
+            <button type="button" id="search_button">Search</button>
+            <input type="search" id="search_bar" placeholder="Enter Hospital Name or Utility or Area or Pincode">
+        </div>
+
+        <div class="search_show">
+
+            <aside><div class="filters_container">
+                <div class="utility_filter">Filter1</div>
+                <div class="utility_filter">Filter2</div>
+                <div class="utility_filter">Filter3</div>
+                <div class="utility_filter">Filter3</div>
+                <div class="utility_filter">Filter3</div>
+                <div class="utility_filter">Filter3</div>
+                
+            </div></aside>
+            
+            <div class="utility-cards-container" data-utility-cards-container>
+                
+            
+                <div class="card_headings" data-utility-template>
+                    <div class="name" utility-name>Hospital Name</div>
+                    <div class="count" utility-count>Count</div>
+                </div>
+
+                <div class="card" data-utility-template>
+                    <div class="name" utility-name>Hospital1</div>
+                    <div class="count" utility-count>Count1</div>
+                </div>
+                <div class="card" data-utility-template>
+                    <div class="name" utility-name>Hospital2</div>
+                    <div class="count" utility-count>Count2</div>
+                </div>
+                <div class="card" data-utility-template>
+                    <div class="name" utility-name>Hospital3</div>
+                    <div class="count" utility-count>Count3</div>
+                </div>
+                <div class="card" data-utility-template>
+                    <div class="name" utility-name>Hospital4</div>
+                    <div class="count" utility-count>Count4</div>
+                </div>
+                            
+                
+            </div>
+
+        </div>
+    </div>
+    
+    
+    <template>
+        <div class="card" data-utility-template>
+            <div class="name" utility-name></div>
+            <div class="count" utility-count></div>
+        </div>
+    </template>
+</body>
+</html>
