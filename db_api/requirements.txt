@@ -1,0 +1,5 @@
+Flask
+Flask_restful
+mysql-connector-python
+flask_cors
+fuzzywuzzy

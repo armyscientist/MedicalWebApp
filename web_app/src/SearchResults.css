@@ -1,0 +1,17 @@
+
+.search-results{
+    margin:30px;
+    
+    
+    flex-grow: 3;
+  }
+
+@media screen and (max-width: 960px) {
+  .search-results{
+    margin:20px;
+    
+    
+    
+  }
+
+}

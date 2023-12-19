@@ -1,0 +1,54 @@
+.element{
+    margin: 10px 20px 10px 0px;
+    
+  }
+  .index{
+    width: 30px;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+  
+  .hospital-info{  
+    display: flex;
+    flex-direction: row;  
+    width: 100%;
+    
+  }
+  
+  .hospital-profile{
+    margin:20px;
+    background-color: #e1f3fd;
+    
+    flex-basis: 500px;
+    border: 5px solid #3aafee;
+    border-radius: 10px;
+    flex-grow: 3;
+  }
+  
+  .utility-list{
+    margin:20px;
+    width:300px;
+    border-radius: 10px;
+    flex-grow: 1;
+    
+    
+  }
+.utility-list >h2{
+  text-align: left;
+}
+.hospital-profile-title{
+  display: flex;
+  flex-direction: column;
+  margin:20px;
+
+}
+
+@media screen and (max-width: 960px) {
+  .hospital-info{  
+    display: flex;
+    flex-direction: column;  
+    width: 100%;
+    
+  }
+
+}

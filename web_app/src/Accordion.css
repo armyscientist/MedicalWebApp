@@ -1,0 +1,116 @@
+.myaccordion-item{
+    
+  border:0px;
+  
+  background-image: linear-gradient(to right, #e4f5fe, #f8fcfe );
+  
+  border-radius: 10px;
+  margin-bottom:20px;
+  box-shadow: 0px 0px 10px #65c7ff;
+    
+  
+} 
+.myaccordion-item.active{
+  box-shadow: 0px 0px 10px 3px #51befd;
+  border : 5px solid #bbe5fd;
+  
+  
+}
+.accordion-title{
+  border-radius: 10px;
+  background-color: transparent;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+.accordion-index{
+  width:20px;
+  padding: 8px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.accordion-hospital-name{
+  overflow-wrap: break-word;  
+  padding: 8px; 
+  
+}
+.accordion-utility-count{
+  width:60px;
+  
+  font-size:x-large;
+  font-weight: bold;
+  padding: 8px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.accordion-title-container{ 
+  
+  border-bottom: 5px solid #b1e2ff ;
+}
+.accordion-content{
+  padding:20px;
+  border-radius: 10px;
+  
+  background-color: transparent;
+  transition: 2s height ease-out;
+}
+.accordion-address, .accordion-phone{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  
+}
+
+.accordion-address{
+  color:#0180c9;
+}
+.accordion-phone > .accordion-content-element{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.accordion-content-element 
+{
+  margin-right:30px;
+  margin-bottom:10px;
+  align-content: center;
+  
+}
+.accordion-address .accordion-phone .accordion-more-info{
+  margin-top:10px;
+}
+
+.accordion-index{
+  width: 30px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.accordion-hospital-name{
+  color:black;
+}
+.accordion-more-info{
+  color:black;
+  display :flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+.element-tag{
+  font-size: 14px;
+  
+}
+
+.element-value{
+  font-size: 16px;
+  
+  color:#000000;
+  text-align: center;
+  
+}
+

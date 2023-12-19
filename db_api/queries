@@ -1,0 +1,100 @@
+//Datatypes             Unsigned size   Signed size
+TINYINT     1   2^8     255             127
+SMALLINT	2   2^16	65,535          32,767
+MEDIUMINT	3	2^24    1,67,77,215     83,88,607
+INT/INTEGER	4	.       4,29,49,67,295  2,14,74,83,647
+BIGINT	    8	.       2^64-1          2^63-1
+
+//Fixed point types D{0,65}
+DECIMAL/FIXED/DEC(M,D)
+NUMERIC(M,D)
+
+//Floating point types(approximate)
+FLOAT(p)/DOUBLE(p) //FLOAT(m.d) depreacated
+DOUBLE PRECISION(M,D)/REAL(M,D) D{0-53}
+
+//Bitwise dataype
+BIT(M) M{1,64}
+//Logical
+BOOL
+//Date and Time
+
+//String
+CHAR()
+VARCHAR()
+BLOB
+TEXT
+
+//Constraints
+NOT NULL
+UNIQUE
+PRIMARY KEY
+FOREIGN KEY
+CHECK
+DEFAULT 
+CREATE INDEX
+
+//while creating a table make sure
+Datatypes
+Constraints
+DEFAULT
+size
+
+//i need to learn
+union
+odrder by group by
+join
+subqueries
+insert into select
+
+//32k hospitals in a city is max may be
+create table hospital_info(
+    hospital_id smallint UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    hospital_name text NOT NULL,
+    building_no varchar(30),
+    street varchar(30),
+    area varchar(30) NOT NULL,
+    city varchar(30) NOT NULL,
+    state varchar(30) NOT NULL,
+    pincode char(6) NOT NULL,
+    phone_appointment varchar(15) NOT NULL UNIQUE,
+    phone_ambulance varchar(15) NOT NULL UNIQUE,
+    phone_inquiry varchar(15),
+    phone3_alternate varchar(15),
+    phone4_incharge char(15),
+    incharge_name varchar(30),
+    gmap text,
+    last_updated datetime);
+
+create table utility_count(
+    hospital_id smallint UNSIGNED,
+    utility_id smallint UNSIGNED,
+    count smallint UNSIGNED DEFAULT 0,
+    total smallint UNSIGNED DEFAULT 0,
+    primary key(hospital_id, utility_id),
+    last_updated datetime,
+    FOREIGN KEY (hospital_id) REFERENCES hospital_info(hospital_id) on delete cascade,
+    FOREIGN KEY (utility_id) REFERENCES utility_info(utility_id) on delete cascade,
+    PRIMARY KEY(hospital_id, utility_id)
+    );
+
+create table utility_info(
+    utility_id smallint UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    utility_name varchar(30) NOT NULL UNIQUE);// can use ENUM
+
+//Change or add a primary key after the table is created
+alter table tblapplicants add primary key (id);
+    
+//Delete a row
+delete from tblapplicants where id=1;
+
+
+create table hospital_login(
+    hospital_id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    hospital_email TEXT UNIQUE,
+    password TEXT NOT NULL,
+    last_updated datetime,
+    last_login datetime,
+    FOREIGN KEY(hospital_id) REFERENCES hospital_info(hospital_id) on delete cascade
+
+);

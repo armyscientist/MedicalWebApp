@@ -1,0 +1,99 @@
+.home{
+  position: absolute;
+  top:0;
+  margin:0;
+  height: 100%;
+  width: 100% ;
+  
+}
+
+video {
+  object-fit:fill; 
+  top:0; 
+  height:100%;
+  width:100%;
+  position: fixed;
+  
+  z-index: -1;
+  justify-content: center;
+  
+}
+.overlay{
+  height: 100%;
+  width:100%;
+  position: fixed;
+  top:0;
+  z-index:-1;
+  background-color: rgba(255, 255, 255, 0.441);
+}
+
+.home-check-button{
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  border:3px solid black;
+  background-color: white;
+  
+  
+  
+  
+  
+  
+  
+}
+.home-check-button > a{
+  color:rgb(0, 0, 0);
+  font-size:xx-large;
+  background-image: linear-gradient(to left, #75cfff,  #ff85c8, #8eff86);
+  padding: 10px 25px 10px 25px;
+  border-radius: 10px;
+  
+  
+  
+}
+
+.hero-container {
+  
+  height: 100vh;
+  margin-top:60px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  object-fit: contain;
+  overflow-wrap: break-word;
+}
+
+.hero-container > h1 {
+  color: rgb(0, 0, 0);
+  font-size: 60px;
+  
+  
+}
+
+.hero-container > p {
+  
+  color: rgba(0, 0, 0, 0.728);
+  font-size: 32px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+}
+
+
+@media screen and (max-width: 960px) {
+  video {
+    object-fit:cover; 
+    top:0; 
+    height:100%;
+    width:100%;
+    position: fixed;
+    
+    z-index: -1;
+    justify-content: center;
+    
+  }
+
+}
+

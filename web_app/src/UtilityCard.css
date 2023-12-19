@@ -1,0 +1,80 @@
+
+.blue-utility-item{   
+    flex-basis: 350px;    
+    display: flex;
+    flex-direction: column;
+    
+    
+    margin:20px;
+    border:5px solid #7dcefd;
+    border-radius: 10px;
+    justify-content: center;
+    background-color: #def3ff;
+
+}
+.green-utility-item{   
+    flex-basis: 350px;    
+    display: flex;
+    flex-direction: column;
+    
+    padding:10px;
+    margin:20px;
+    border:5px solid #11d802;
+    border-radius: 10px;
+    justify-content: center;
+    background-color: #dcffd9;
+
+}
+
+.pink-utility-item{   
+    flex-basis: 350px;    
+    display: flex;
+    flex-direction: column;
+    padding:20px;
+    margin:20px;
+    border:5px solid #FF87CA;
+    border-radius: 10px;
+    justify-content: space-between;
+    background-color: #fbc4e2;
+
+}
+
+.utility-info{
+    align-items: center;
+}
+.utility-content{
+    display: flex;
+    margin:10px;    
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+}
+.utility-count-content{
+    display:flex;
+    flex-direction: row;
+    margin:10px;
+}
+.hospital-name{
+    text-align: center;
+}
+.hospital-content{
+    margin:10px;
+}
+
+.card-logo{
+    margin-left:20px;
+}
+.utility-item-link{
+    display: flex;
+    width:350px;
+    
+    
+}
+
+@media screen and (max-width: 960px) {
+    .utility-item{
+        display: flex;
+    }
+}
