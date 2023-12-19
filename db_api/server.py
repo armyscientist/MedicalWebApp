@@ -22,7 +22,6 @@ def connectDB():
 def hospital_login():
     conn=connectDB()
     cursor=conn.cursor(buffered=True)
-    print("****************request=",request)
     hospital_id=request.args.get('hospital_id')
     hospital_email=request.args.get('hospital_email')
     hospital_password=request.args.get('password')
@@ -32,7 +31,6 @@ def hospital_login():
     response={'login_status':False}
     if(cursor.rowcount):
         response['login_status']=True
-    print("*******login status=",response)
     return jsonify(response)
 
 @app.route('/top-utility-list', methods=['GET'])
@@ -62,7 +60,6 @@ def home_display():
             result[col]=row[i]        
         response_data.append(result)
     response["top_utility_list"]=response_data
-    print("################sending respone=",response)
     return(jsonify(response))
 
 #This includes in the complete presentation of the website
@@ -86,7 +83,6 @@ def utility_list():
     conn=connectDB()
     cursor=conn.cursor(buffered=True)
     hospital_id=request.args.get('hospital_id')
-    print("######hopsital id=",hospital_id) 
     #This only displays hosiptal_info table
     if(hospital_id=="all"):
         q1="""select utility_id, utility_name from utility_info;"""
@@ -103,7 +99,6 @@ def utility_list():
             result[col]=row[i]        
         response_data.append(result)
     response["utility_list"]=response_data
-    print("################sending respone=",response)
     return(jsonify(response))
 
 
@@ -113,7 +108,6 @@ def utility_list():
 def getHospitalMatchedIds(cursor, hospital_name):
     result_hospital_ids=[]
     for (id, name) in cursor:
-        print('$$$$$$$$$$$$$$$$inside get hospitalmathcedids=',id, name, hospital_name)
         if(fuzz.partial_ratio(hospital_name.lower(), name.lower())>80):
             result_hospital_ids.append(id)
     return result_hospital_ids
@@ -125,7 +119,6 @@ def search():
     #print("############cursor=",cursor.fetchone())
     utility_id=request.args.get('utility_id')
     hospital_name=request.args.get('hospital_name')
-    print('#################Received reqeust=', hospital_name, utility_id)      
 
     #Two types of searches
     #hospital name wise search
@@ -136,7 +129,6 @@ def search():
         q="select hospital_id, hospital_name from hospital_info;"
         cursor.execute(q)
         hospital_ids=getHospitalMatchedIds(cursor, hospital_name)
-        print("##############hospital ids=",hospital_ids)
         #if any hospital is found
         if(hospital_ids):
             
@@ -148,7 +140,6 @@ def search():
             FROM hospital_info where hospital_id=%s"""+q
             cursor.execute(q2, (hospital_ids[0],))
         else:
-            print('*****************Sending Response = ', response)
             return(response)
 
      #***************************************accept input utility
@@ -167,9 +158,7 @@ def search():
         q="select hospital_id, hospital_name from hospital_info;"
         cursor.execute(q,())
         hospital_ids=getHospitalMatchedIds(cursor, hospital_name)
-        print("##############hospital ids=",hospital_ids)
         if(hospital_ids):
-            print("##############hospital ids=",hospital_ids)
             #concatente all ids and prepare query
             q=''
             for i in range(1, len(hospital_ids)):
@@ -182,7 +171,6 @@ def search():
             ON hospital_info.hospital_id =got_utility.hospital_id WHERE hospital_info.hospital_id=%s"""+q
             cursor.execute(q2,(utility_id, hospital_ids[0]))
         else:
-            print('*****************Sending Response = ', response)
             return(response)
 
     #column_names=cursor.column_names
@@ -197,7 +185,6 @@ def search():
 
     response["result_data"]=response_data  
     
-    print('*****************Sending Response = ', response)
     return(jsonify(response))
 
 from datetime import datetime
@@ -205,26 +192,21 @@ from datetime import datetime
 def add_utility():
     conn=connectDB()
     cursor=conn.cursor(buffered=True)
-    print('########## request=',request)
     utility_list=request.json
     q="""INSERT INTO utility_count VALUES (%s, %s, %s, %s, %s)"""
     for i in utility_list:
         for j in i:
             now=datetime.now()
             current_time=now.strftime("%Y-%m-%d %H:%M:%S")
-            cursor.execute(q, (j['hospital_id'],     j['utility_id'], j['count'], j['total'], current_time))    
+            # cursor.execute(q, (j['hospital_id'],     j['utility_id'], j['count'], j['total'], current_time))    
+            
+            if isinstance(j, dict):
+                cursor.execute(q, (j['hospital_id'], j['utility_id'], j['count'], j['total'], current_time))
+                return({"response":"success"}), 200
+            else:
+    # Handle the case where j is not a dictionary
+                return {"response":"error"}, 500
 
-    print("########### done")
-    return({"response":"success"})
-
-@app.route('/test', methods=['GET'])
-def test():
-    return jsonify({"utilities":[{"utility_type":"vaccine",
-                                    "hospital_name":"Rugnalyaa",
-                                    "count":10,
-                                    "address":"Solapur",
-                                    "pincode":413005}
-                                    ]})
 
 
 if __name__=="__main__":
