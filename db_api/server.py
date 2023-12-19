@@ -158,7 +158,9 @@ def search():
         q="select hospital_id, hospital_name from hospital_info;"
         cursor.execute(q,())
         hospital_ids=getHospitalMatchedIds(cursor, hospital_name)
+        print("##############hospital ids=",hospital_ids)
         if(hospital_ids):
+            print("##############hospital ids=",hospital_ids)
             #concatente all ids and prepare query
             q=''
             for i in range(1, len(hospital_ids)):
@@ -171,6 +173,7 @@ def search():
             ON hospital_info.hospital_id =got_utility.hospital_id WHERE hospital_info.hospital_id=%s"""+q
             cursor.execute(q2,(utility_id, hospital_ids[0]))
         else:
+            print('*****************Sending Response = ', response)
             return(response)
 
     #column_names=cursor.column_names
@@ -185,6 +188,7 @@ def search():
 
     response["result_data"]=response_data  
     
+    print('*****************Sending Response = ', response)
     return(jsonify(response))
 
 from datetime import datetime
@@ -192,20 +196,16 @@ from datetime import datetime
 def add_utility():
     conn=connectDB()
     cursor=conn.cursor(buffered=True)
+    print('########## request=',request)
     utility_list=request.json
     q="""INSERT INTO utility_count VALUES (%s, %s, %s, %s, %s)"""
     for i in utility_list:
         for j in i:
             now=datetime.now()
             current_time=now.strftime("%Y-%m-%d %H:%M:%S")
-            # cursor.execute(q, (j['hospital_id'],     j['utility_id'], j['count'], j['total'], current_time))    
-            
-            if isinstance(j, dict):
-                cursor.execute(q, (j['hospital_id'], j['utility_id'], j['count'], j['total'], current_time))
-                return({"response":"success"}), 200
-            else:
-    # Handle the case where j is not a dictionary
-                return {"response":"error"}, 500
+            cursor.execute(q, (j['hospital_id'],     j['utility_id'], j['count'], j['total'], current_time))    
+
+    return({"response":"success"})
 
 
 
