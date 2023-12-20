@@ -98,3 +98,57 @@ create table hospital_login(
     FOREIGN KEY(hospital_id) REFERENCES hospital_info(hospital_id) on delete cascade
 
 );
+
+---------
+
+CREATE TABLE `hospital_info` (
+  `hospital_id` smallint unsigned NOT NULL AUTO_INCREMENT,
+  `hospital_name` text NOT NULL,
+  `building_no` varchar(30) DEFAULT NULL,
+  `street` varchar(30) DEFAULT NULL,
+  `area` varchar(30) NOT NULL,
+  `city` varchar(30) NOT NULL,
+  `state` varchar(30) NOT NULL,
+  `pincode` char(6) NOT NULL,
+  `phone_appointment` varchar(15) NOT NULL,
+  `phone_ambulance` varchar(15) NOT NULL,
+  `phone_inquiry` varchar(15) DEFAULT NULL,
+  `phone3_alternate` varchar(15) DEFAULT NULL,
+  `phone4_incharge` char(15) DEFAULT NULL,
+  `incharge_name` varchar(30) DEFAULT NULL,
+  `gmap` text,
+  `last_updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`hospital_id`),
+  UNIQUE KEY `phone_appointment` (`phone_appointment`),
+  UNIQUE KEY `phone_ambulance` (`phone_ambulance`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `hospital_login` (
+  `hospital_id` smallint unsigned NOT NULL AUTO_INCREMENT,
+  `hospital_email` varchar(100) DEFAULT NULL,
+  `password` text NOT NULL,
+  `last_updated` datetime DEFAULT NULL,
+  `last_login` datetime DEFAULT NULL,
+  PRIMARY KEY (`hospital_id`),
+  UNIQUE KEY `hospital_email` (`hospital_email`),
+  CONSTRAINT `hospital_login_ibfk_1` FOREIGN KEY (`hospital_id`) REFERENCES `hospital_info` (`hospital_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `utility_count` (
+  `hospital_id` smallint unsigned NOT NULL,
+  `utility_id` smallint unsigned NOT NULL,
+  `count` smallint unsigned DEFAULT '0',
+  `total` smallint unsigned DEFAULT '0',
+  `last_updated` datetime DEFAULT NULL,
+  PRIMARY KEY (`hospital_id`,`utility_id`),
+  KEY `utility_id` (`utility_id`),
+  CONSTRAINT `utility_count_ibfk_1` FOREIGN KEY (`hospital_id`) REFERENCES `hospital_info` (`hospital_id`) ON DELETE CASCADE,
+  CONSTRAINT `utility_count_ibfk_2` FOREIGN KEY (`utility_id`) REFERENCES `utility_info` (`utility_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `utility_info` (
+  `utility_id` smallint unsigned NOT NULL AUTO_INCREMENT,
+  `utility_name` varchar(30) NOT NULL,
+  PRIMARY KEY (`utility_id`),
+  UNIQUE KEY `utility_name` (`utility_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

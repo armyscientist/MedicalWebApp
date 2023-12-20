@@ -78,32 +78,6 @@ def search_dropdown_list():
         response_data.append(result)
     return(jsonify({"search_dropdown_list":response_data}))
 
-@app.route('/utility-list', methods=['GET'])
-def utility_list():
-    conn=connectDB()
-    cursor=conn.cursor(buffered=True)
-    hospital_id=request.args.get('hospital_id')
-    #This only displays hosiptal_info table
-    if(hospital_id=="all"):
-        q1="""select utility_id, utility_name from utility_info;"""
-    else:
-        q1="""select utility_info.utility_id, utility_name, count, total from utility_info 
-    RIGHT JOIN utility_count ON utility_info.utility_id=utility_count.utility_id  where utility_count.hospital_id="""+str(hospital_id)    
-
-    cursor.execute(q1)
-    response_data=[]    
-    response={}
-    for row in cursor:
-        result={}
-        for i, col in enumerate(cursor.column_names):
-            result[col]=row[i]        
-        response_data.append(result)
-    response["utility_list"]=response_data
-    return(jsonify(response))
-
-
-
-
 #function
 def getHospitalMatchedIds(cursor, hospital_name):
     result_hospital_ids=[]
@@ -116,14 +90,12 @@ def getHospitalMatchedIds(cursor, hospital_name):
 def search():       
     conn=connectDB()
     cursor=conn.cursor(buffered=True)
-    #print("############cursor=",cursor.fetchone())
     utility_id=request.args.get('utility_id')
     hospital_name=request.args.get('hospital_name')
 
     #Two types of searches
     #hospital name wise search
     response={"result_data":None}
-    #**************************************************
     if(hospital_name and utility_id==None):
         #match name
         q="select hospital_id, hospital_name from hospital_info;"
@@ -142,7 +114,6 @@ def search():
         else:
             return(response)
 
-     #***************************************accept input utility
     #Utility type wise search
     elif(hospital_name==None and utility_id):        
          #1)filter from utility_count and left join with hospital_id
@@ -158,9 +129,7 @@ def search():
         q="select hospital_id, hospital_name from hospital_info;"
         cursor.execute(q,())
         hospital_ids=getHospitalMatchedIds(cursor, hospital_name)
-        print("##############hospital ids=",hospital_ids)
         if(hospital_ids):
-            print("##############hospital ids=",hospital_ids)
             #concatente all ids and prepare query
             q=''
             for i in range(1, len(hospital_ids)):
@@ -173,7 +142,6 @@ def search():
             ON hospital_info.hospital_id =got_utility.hospital_id WHERE hospital_info.hospital_id=%s"""+q
             cursor.execute(q2,(utility_id, hospital_ids[0]))
         else:
-            print('*****************Sending Response = ', response)
             return(response)
 
     #column_names=cursor.column_names
@@ -187,26 +155,8 @@ def search():
             response_data.append(result)
 
     response["result_data"]=response_data  
-    
-    print('*****************Sending Response = ', response)
+
     return(jsonify(response))
-
-from datetime import datetime
-@app.route('/add-utility', methods=['POST'])
-def add_utility():
-    conn=connectDB()
-    cursor=conn.cursor(buffered=True)
-    print('########## request=',request)
-    utility_list=request.json
-    q="""INSERT INTO utility_count VALUES (%s, %s, %s, %s, %s)"""
-    for i in utility_list:
-        for j in i:
-            now=datetime.now()
-            current_time=now.strftime("%Y-%m-%d %H:%M:%S")
-            cursor.execute(q, (j['hospital_id'],     j['utility_id'], j['count'], j['total'], current_time))    
-
-    return({"response":"success"})
-
 
 
 if __name__=="__main__":
