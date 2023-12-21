@@ -14,18 +14,18 @@ To run the front end and backend of the MedicalWebApp project, follow these step
 4. The frontend will be accessible at http://localhost:3000 in your browser.
 
 ## Backend:
-1. Open the file MedicalWebApp/db_api/server.py in a text editor.
+1. Open the file MedicalWebApp/db_api/app.py in a text editor.
 2. Make sure you have the necessary dependencies installed which are listed in the file named requirements.txt present in the folder db_api. You can install these dependencies using pip:
 ```
    pip install -r requirements.txt
 ```
 3. Set up the MySQL database. Make sure you have MySQL installed and running on your local machine. Create a new database named medicalwebappserver.
-4. In the connectDB() function in server.py, update the connection parameters to match your MySQL configuration. Modify the host, user, passwd, and database values accordingly.
+4. In the connectDB() function in app.py, update the connection parameters to match your MySQL configuration. Modify the host, user, passwd, and database values accordingly.
 5. Run the Flask application. In the terminal, navigate to the MedicalWebApp/db_api directory and run the following command:
 ```
-python server.py
+python app.py
 ```
-You can now access the server by opening a web browser and entering the URL http://localhost:5000, where 5000 is the port number specified in the server.py file then you would enter http://localhost:5000 in the browser.
+You can now access the server by opening a web browser and entering the URL http://localhost:5000, where 5000 is the port number specified in the app.py file then you would enter http://localhost:5000 in the browser.
 
 # Testing
 Test the backend endpoints. You can use tools like Postman or cURL to send HTTP requests to the backend endpoints and verify their functionality. Here are some example endpoints you can test:
@@ -35,7 +35,7 @@ Test the backend endpoints. You can use tools like Postman or cURL to send HTTP 
 - GET /utility-list: This endpoint retrieves the utility list. You can provide the hospital_id as a query parameter to get the utility list for a specific hospital.
 - GET /search: This endpoint handles hospital search based on hospital name and utility ID. You can provide the hospital_name and/or utility_id as query parameters to search for hospitals.
 
-Before running the backend, you need to manually create the MySQL database and tables. You can use the SQL queries provided in the server.py file to create the necessary tables. Here is an example of how to create the tables:
+Before running the backend, you need to manually create the MySQL database and tables. You can use the SQL queries provided in the app.py file to create the necessary tables. Here is an example of how to create the tables:
 
 # Database
 CREATE TABLE `hospital_info` (
@@ -93,7 +93,7 @@ CREATE TABLE `utility_info` (
 # API Documentation
 The API documentation for the MedicalWebApp can be found in the following file:
 
-File: MedicalWebApp/db_api/server.py
+File: MedicalWebApp/db_api/app.py
 
 Here is an overview of the API endpoints, request/response formats, and authentication/authorization requirements:
 
@@ -141,7 +141,7 @@ Please note that this is a high-level overview of the API documentation. For mor
 # Testing
 
 1. You can test these endpoints using tools like Postman or cURL by sending HTTP requests to the corresponding URLs.
-2. If you create test cases in the same folder as server.py that uses in-built ```unittest``` library, then navigate to folder db_api and run the following command on terminal :
+2. If you create test cases in the same folder as app.py that uses in-built ```unittest``` library, then navigate to folder db_api and run the following command on terminal :
 ```
 python <test_filename.py>
 ```
