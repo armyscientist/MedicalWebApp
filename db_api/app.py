@@ -19,7 +19,7 @@ def connectDB():
     return conn
 
 @app.route('/hospital-login', methods=['GET'])
-def hospital_login():
+def Hospital_Login():
     conn=connectDB()
     cursor=conn.cursor(buffered=True)
     hospital_id=request.args.get('hospital_id')
