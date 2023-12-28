@@ -50,6 +50,7 @@ def home_display():
             left join utility_count on utility_count.utility_id = utility_maxcount.utility_id and count = max) 
             as utility_hospital_maxcount
         left join hospital_info on hospital_info.hospital_id=utility_hospital_maxcount.hospital_id;"""
+
     cursor.execute(q1)
     response={}   
     response_data=[]    
@@ -62,21 +63,6 @@ def home_display():
     response["top_utility_list"]=response_data
     return(jsonify(response))
 
-#This includes in the complete presentation of the website
-@app.route('/search-dropdown-list', methods=['GET'])
-def search_dropdown_list():
-    conn=connectDB()
-    cursor=conn.cursor(buffered=True)
-    #This only displays hosiptal_info table
-    q1="select utility_id, utility_name from utility_info order by utility_id;"
-    cursor.execute(q1)
-    response_data=[]    
-    for row in cursor:
-        result={}
-        result['value']=row[0]
-        result['label']=row[1]        
-        response_data.append(result)
-    return(jsonify({"search_dropdown_list":response_data}))
 
 #function
 def getHospitalMatchedIds(cursor, hospital_name):
@@ -157,6 +143,24 @@ def search():
     response["result_data"]=response_data  
 
     return(jsonify(response))
+
+@app.route('/utility_list/<hospital_id>', methods=['GET'])
+def get_utility_list(hospital_id):
+    try:
+        with connectDB() as conn, conn.cursor() as cur:
+            
+            if hospital_id == "all":
+                cur.execute("SELECT * FROM utility_info")
+            else:
+                cur.execute("SELECT * FROM utility_info WHERE utility_id IN (SELECT utility_id FROM utility_count WHERE hospital_id = %s)", (hospital_id,))
+
+            rows = cur.fetchall()
+            utilities = [{'utility_id': row[0], 'utility_name': row[1]} for row in rows]
+            response = {'utility_list': utilities}
+            return jsonify(response)
+    except Exception as e:
+        
+        return jsonify({'error': 'An error occurred while retrieving the utility list.'}), 500
 
 
 if __name__=="__main__":

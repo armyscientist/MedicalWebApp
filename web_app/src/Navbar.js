@@ -67,7 +67,6 @@ function Navbar() {
                 <h1>Top</h1>
               </Link>
             </li>
-
           </ul>
           {/*button && <Button buttonStyle='btn--outline'>SIGN UP</Button>*/}
         </div>
