@@ -31,7 +31,6 @@ You can now access the server by opening a web browser and entering the URL http
 Test the backend endpoints. You can use tools like Postman or cURL to send HTTP requests to the backend endpoints and verify their functionality. Here are some example endpoints you can test:
 - GET /hospital-login: This endpoint handles hospital login. You can provide the hospital_id, hospital_email, and password as query parameters to test the login functionality.
 - GET /top-utility-list: This endpoint retrieves the top utility list. It does not require any parameters.
-- GET /search-dropdown-list: This endpoint retrieves the search dropdown list. It does not require any parameters.
 - GET /utility-list: This endpoint retrieves the utility list. You can provide the hospital_id as a query parameter to get the utility list for a specific hospital.
 - GET /search: This endpoint handles hospital search based on hospital name and utility ID. You can provide the hospital_name and/or utility_id as query parameters to search for hospitals.
 
@@ -109,25 +108,19 @@ Here is an overview of the API endpoints, request/response formats, and authenti
 - Request Format: GET request.
 - Response Format: JSON response containing the top utility list.
 
-3. Endpoint: /search-dropdown-list
-- Method: GET
-- Description: Retrieves the search dropdown list.
-- Request Format: GET request.
-- Response Format: JSON response containing the search dropdown list.
-
-4. Endpoint: /utility-list
+3. Endpoint: /utility-list
 - Method: GET
 - Description: Retrieves the utility list based on hospital ID.
 - Request Format: GET request with hospital ID as a query parameter.
 - Response Format: JSON response containing the utility list.
 
-5. Endpoint: /search
+4. Endpoint: /search
 - Method: GET
 - Description: Searches hospitals based on hospital name and utility ID.
 - Request Format: GET request with hospital name and utility ID as query parameters.
 - Response Format: JSON response containing the search results.
 
-6. Endpoint: /test
+5. Endpoint: /test
 - Method: GET
 - Description: For testing purposes.
 - Request Format: GET request.
