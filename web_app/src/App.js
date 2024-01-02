@@ -73,7 +73,7 @@ console.log(location)
                      
           isClearable  
           value={{label:searchQuery.utility_name, value:searchQuery.utility_id}}
-          options={data.search_dropdown_list}
+          options={data}
           placeholder="Select Utility"
           onChange={opt=> {setSearchQueryObject("utility", opt);}}/>
 
@@ -102,21 +102,9 @@ console.log(location)
               </div>}
               /> 
             <Route path='/hospital-info' element={<div className="below-search-bar"><HospitalInfo/></div>}/>
-              
-            
-            
           </Routes>  
-           
-        
-
-          
-
         </div> 
         </div>
-
-    
-
-
   );
   }
 

@@ -67,6 +67,12 @@ function Navbar() {
                 <h1>Top</h1>
               </Link>
             </li>
+            <li className='nav-item'>
+              <Link to='/utilities' className='nav-links' onClick={closeMobileMenu}>
+                <img src={utility_list_icon} width="50px" height="50px"></img>  
+                <h1>Utilities</h1> 
+              </Link>
+            </li>
           </ul>
           {/*button && <Button buttonStyle='btn--outline'>SIGN UP</Button>*/}
         </div>

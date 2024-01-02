@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import './App.css';
 import Home from './Home';
 import { Routes, Switch, Route } from 'react-router-dom';
-
+import HomeUtilityList from './HomeUtilityList';
 import App from './App';
 import TopUtilityList from './TopUtilityList';
 import Cards from './Cards.js';
@@ -19,6 +19,7 @@ function MainApp() {
           <Route path='/' exact element={<Home/>} />
           <Route path='/top-utilities' element={<TopUtilityList/>} />
           <Route path='/search/*' element={<App/>} />
+          <Route path='/utilities' element={<HomeUtilityList/>} />
         </Routes>
         </div>
         </div>

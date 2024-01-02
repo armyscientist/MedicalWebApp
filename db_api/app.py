@@ -156,12 +156,11 @@ def get_utility_list(hospital_id):
 
             rows = cur.fetchall()
             utilities = [{'utility_id': row[0], 'utility_name': row[1]} for row in rows]
-            response = {'utility_list': utilities}
+            response = utilities
             return jsonify(response)
     except Exception as e:
         
         return jsonify({'error': 'An error occurred while retrieving the utility list.'}), 500
-
 
 if __name__=="__main__":
     app.run(debug=True)
