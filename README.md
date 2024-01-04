@@ -8,19 +8,23 @@ The MedicalWebApp is a web-based application that simplifies medical record mana
 To run the front end and backend of the MedicalWebApp project, follow these steps:
 
 ## Frontend:
-1. Navigate to the 'MedicalWebApp/web_app' directory.
-2. Open a terminal and run the command npm install to install the required dependencies.
-3. After the installation is complete, run the command npm start to start the development server.
-4. The frontend will be accessible at http://localhost:3000 in your browser.
+1. Make sure NodeJS is installed. Run npm --version to check version.
+2. Navigate to the 'MedicalWebApp/web_app' directory.
+3. Open a terminal and run the command npm install to install the required dependencies.
+4. After the installation is complete, run the command npm start to start the development server.
+5. The frontend will be accessible at http://localhost:3000 in your browser.
 
 ## Backend:
 1. Open the file MedicalWebApp/db_api/app.py in a text editor.
-2. Make sure you have the necessary dependencies installed which are listed in the file named requirements.txt present in the folder db_api. You can install these dependencies using pip:
+2. Make sure you have Python3.9 installed and all necessary dependencies installed listed in the file named requirements.txt present in the same directory. You can install these dependencies using pip:
 ```
    pip install -r requirements.txt
 ```
-3. Set up the MySQL database. Make sure you have MySQL installed and running on your local machine. Create a new database named medicalwebappserver.
-4. In the connectDB() function in app.py, update the connection parameters to match your MySQL configuration. Modify the host, user, passwd, and database values accordingly.
+3. For development, SQLite3 database is used for medicalwebappserver. In app.py, the connectDB() function connects the SQLite3 database and returns connection object.
+4. To setup the SQLite database and populate database with some sample data, run 
+```
+python setup_db.py
+```
 5. Run the Flask application. In the terminal, navigate to the MedicalWebApp/db_api directory and run the following command:
 ```
 python app.py
@@ -31,10 +35,10 @@ You can now access the server by opening a web browser and entering the URL http
 Test the backend endpoints. You can use tools like Postman or cURL to send HTTP requests to the backend endpoints and verify their functionality. Here are some example endpoints you can test:
 - GET /hospital-login: This endpoint handles hospital login. You can provide the hospital_id, hospital_email, and password as query parameters to test the login functionality.
 - GET /top-utility-list: This endpoint retrieves the top utility list. It does not require any parameters.
-- GET /utility-list: This endpoint retrieves the utility list. You can provide the hospital_id as a query parameter to get the utility list for a specific hospital.
+- GET /utility-list: This endpoint retrieves the utility list for given hospital_id for a specific hospital. You can provide the hospital_id=all as a query parameter to get the utility list for all hospitals.
 - GET /search: This endpoint handles hospital search based on hospital name and utility ID. You can provide the hospital_name and/or utility_id as query parameters to search for hospitals.
 
-Before running the backend, you need to manually create the MySQL database and tables. You can use the SQL queries provided in the app.py file to create the necessary tables. Here is an example of how to create the tables:
+Before running the backend, you need to manually create the SQLite database and tables. You can use the SQL queries provided in the app.py file to create the necessary tables. Here is an example of how to create the tables:
 
 # Database
 CREATE TABLE `hospital_info` (
@@ -119,12 +123,6 @@ Here is an overview of the API endpoints, request/response formats, and authenti
 - Description: Searches hospitals based on hospital name and utility ID.
 - Request Format: GET request with hospital name and utility ID as query parameters.
 - Response Format: JSON response containing the search results.
-
-5. Endpoint: /test
-- Method: GET
-- Description: For testing purposes.
-- Request Format: GET request.
-- Response Format: JSON response with dummy data.
 
 Authentication/Authorization Requirements:
 - The API endpoints may require authentication/authorization based on the specific requirements of the MedicalWebApp. Please refer to the code implementation for details on how authentication/authorization is handled.
