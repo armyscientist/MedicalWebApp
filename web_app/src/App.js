@@ -54,7 +54,7 @@ function App(props) {
 
 //For result display
   const loadDropDownListData = async () => {
-  return await axios.get('http://127.0.0.1:5000/search-dropdown-filter')
+  return await axios.get('http://127.0.0.1:5000/search-dropdown-list')
                     .then((response) => setData(response.data))
                     .catch((err) =>console.log(err));
 
